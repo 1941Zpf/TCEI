@@ -15,6 +15,8 @@
 
 ## Highlight
 ⭐ Our paper has been accepted by CVPR2026 !
+\
+⭐ Our <a href="http://arxiv.org/abs/2603.21629">paper</a> has been uploaded to arXiv.
 
 ## Abstract
 Multiple Object Tracking (MOT) has long been a fundamental task in computer vision, with broad applications in various real-world scenarios.
