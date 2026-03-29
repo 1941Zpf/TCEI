@@ -70,8 +70,6 @@ For example, you can get our default results on the DanceTrack test set as follo
 python submit_and_evaluate.py --data-root ./datasets/ --inference-mode submit --config-path ./configs/dancetrack.yaml --inference-model ./outputs/dancetrack/dancetrack.pth --outputs-dir ./outputs/dancetrack/ --inference-dataset DanceTrack --inference-split test
 ```
 
-:racing_car: You can add `--inference-dtype FP16` to the script to use float16 for inference. This can improve inference speed by over 30% with only a slight impact on tracking performance (about 0.5 HOTA on DanceTrack test).
-
 ### Evaluation
 
 You can obtain both the tracking results (tracker files) and evaluation results using the following **template script**:
