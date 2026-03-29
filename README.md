@@ -14,9 +14,9 @@
 
 
 ## Highlight
-⭐ Our paper has been accepted by CVPR2026 !
+⭐ Our <a href="http://arxiv.org/abs/2603.21629">[paper]</a> has been accepted by CVPR2026 !
 \
-⭐ Our <a href="http://arxiv.org/abs/2603.21629">paper</a> has been uploaded to arXiv.
+⭐ Our <a href="http://arxiv.org/abs/2603.21629">[paper]</a> has been uploaded to arXiv.
 
 ## Abstract
 Multiple Object Tracking (MOT) has long been a fundamental task in computer vision, with broad applications in various real-world scenarios.
@@ -28,3 +28,60 @@ In this framework, the Intuitive system utilizes transient memory to recall rece
 Furthermore, both confident and uncertain objects during online testing are exploited as historical priors and reflective cases, respectively, enabling the model to adapt to the testing environment and alleviate performance degradation.
 Extensive experiments demonstrate that the proposed TCEI framework consistently achieves superior performance across multiple benchmark datasets and significantly enhances the model's adaptability under distribution shifts.
 
+## Overview
+![Overview](asset/overview.jpg)
+
+# Installation
+
+Our codebase is built upon **Python 3.12, PyTorch 2.4.0 (recommended)**. 
+
+## Setup scripts
+
+```shell
+conda create -n TCEI python=3.12		# suggest to use virtual envs
+conda activate TCEI
+# PyTorch:
+conda install pytorch==2.4.0 torchvision==0.19.0 torchaudio==2.4.0 pytorch-cuda=12.1 -c pytorch -c nvidia
+# Other dependencies:
+conda install pyyaml tqdm matplotlib scipy pandas
+pip install wandb accelerate einops
+# Compile the Deformable Attention:
+cd models/ops/
+sh make.sh
+# [Optional] After compiled, you can use following script to test it:
+python test.py
+```
+
+## Inference
+
+:pushpin: **Different inference behaviors are controlled by the runtime parameter `--inference-mode`.**
+
+### Submission
+
+You can obtain the tracking results (tracker files) using the following **template script**:
+
+```shell
+python submit_and_evaluate.py --data-root <DATADIR> --inference-mode submit --config-path <.yaml config file path> --inference-model <checkpoint path> --outputs-dir <outputs dir> --inference-dataset <dataset name> --inference-split <split name>
+```
+
+For example, you can get our default results on the DanceTrack test set as follows:
+
+```shell
+python submit_and_evaluate.py --data-root ./datasets/ --inference-mode submit --config-path ./configs/dancetrack.yaml --inference-model ./outputs/dancetrack/dancetrack.pth --outputs-dir ./outputs/dancetrack/ --inference-dataset DanceTrack --inference-split test
+```
+
+:racing_car: You can add `--inference-dtype FP16` to the script to use float16 for inference. This can improve inference speed by over 30% with only a slight impact on tracking performance (about 0.5 HOTA on DanceTrack test).
+
+### Evaluation
+
+You can obtain both the tracking results (tracker files) and evaluation results using the following **template script**:
+
+```shell
+python submit_and_evaluate.py --data-root <DATADIR> --inference-mode evaluate --config-path <.yaml config file path> --inference-model <checkpoint path> --outputs-dir <outputs dir> --inference-dataset <dataset name> --inference-split <split name>
+```
+
+For example, you can get the evaluation results on the DanceTrack val set as follows:
+
+```shell
+python submit_and_evaluate.py --data-root ./datasets/ --inference-mode evaluate --config-path ./configs/dancetrack.yaml --inference-model ./outputs/dancetrack/dancetrack.pth --outputs-dir ./outputs/dancetrack/ --inference-dataset DanceTrack --inference-split val
+```
