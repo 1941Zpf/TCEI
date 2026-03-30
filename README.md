@@ -56,6 +56,8 @@ python test.py
 
 :pushpin: **Different inference behaviors are controlled by the runtime parameter `--inference-mode`.**
 
+You can download the checkpoint file through <a href="https://pan.baidu.com/s/1FyxNpayCdnNOj4yHSUDaXA?pwd=TCEI">[Baidu Netdisk]</a> and place it in the /outputs folder.
+
 ### Submission
 
 You can obtain the tracking results (tracker files) using the following **template script**:
@@ -83,3 +85,13 @@ For example, you can get the evaluation results on the DanceTrack val set as fol
 ```shell
 python submit_and_evaluate.py --data-root ./datasets/ --inference-mode evaluate --config-path ./configs/dancetrack.yaml --inference-model ./outputs/dancetrack/dancetrack.pth --outputs-dir ./outputs/dancetrack/ --inference-dataset DanceTrack --inference-split val
 ```
+
+## Acknowledgments
+
+- [**DETR**](https://github.com/facebookresearch/detr)
+- [**MOTR**](https://github.com/megvii-research/MOTR)
+- [**MOTIP**](https://github.com/MCG-NJU/MOTIP)
+- [**TENT**](https://github.com/DequanWang/tent)
+- [**TDA**](https://github.com/kdiAAA/TDA)
+- [**FSTTA**](https://github.com/Feliciaxyao/ICML2024-FSTTA)
+- [**PURA**](https://melantech.github.io/PURA/)
